@@ -23,6 +23,10 @@ Como extensión de la tarea, permite registrar la ubicación de los estudiantes 
 - Identificación automática de la zona con mayor concentración de estudiantes.
 - Opción para limpiar los registros usados durante la demostración.
 
+## Compatibilidad de dependencias
+
+El archivo `app/build.gradle` excluye los artefactos heredados `kotlin-stdlib-jdk7` y `kotlin-stdlib-jdk8`, porque sus clases ya forman parte de `kotlin-stdlib` moderno. Esto evita el error `Duplicate class` cuando distintas dependencias transitivas incluyen versiones incompatibles.
+
 ## Dependencia solicitada por la guía
 
 En `app/build.gradle` se encuentra:
@@ -238,3 +242,10 @@ Si el repositorio ya fue clonado previamente, no ejecutes nuevamente `git init` 
 ## Consideraciones de privacidad
 
 La ubicación es información personal. Para una aplicación real se debería informar claramente el propósito del tratamiento de datos, solicitar consentimiento y utilizar almacenamiento/transferencia segura. En este laboratorio los datos permanecen localmente en el dispositivo utilizado para la demostración.
+
+
+## Compatibilidad del tema visual
+
+`MainActivity` extiende `AppCompatActivity`; por tanto, `AppTheme` debe heredar de `Theme.AppCompat.Light.NoActionBar`. Un tema nativo `android:style/Theme.Material.*` puede compilar, pero provocar un cierre al iniciar la actividad con AppCompat. Esta versión contiene la configuración compatible.
+
+Si la instalación funciona pero la pantalla de inicio no aparece, revisa **Logcat** en Android Studio con el filtro `AndroidRuntime` para identificar cualquier fallo de ejecución.
